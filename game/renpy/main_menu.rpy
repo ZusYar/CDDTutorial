@@ -18,9 +18,12 @@ screen main_menu():
                 style "main_menu_version"
 
     vbox:
+        xoffset 20
+        yoffset 20
         label "Basics"
         textbutton 'Lesson 1 - First CDD' action Start('lesson_01_first_cdd')
-        textbutton 'Lesson 2 - Events' action Start('lesson_02_events')
+        textbutton 'Lesson 2 - Events (Mouse)' action Start('lesson_02_events')
+        textbutton 'Lesson 3 - Events (Keyboard)' action Start('lesson_03_kb_events')
 
 
 style main_menu_frame is empty
@@ -30,7 +33,7 @@ style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
 
 style main_menu_frame:
-    xsize 280
+    xsize 400
     yfill True
 
     background "gui/overlay/main_menu.png"
