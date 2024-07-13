@@ -1,0 +1,89 @@
+#begin lesson_01_01a
+class Example(renpy.Displayable):
+    pass
+#end lesson_01_01a
+
+#begin lesson_01_01b
+class Example(renpy.Displayable):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+#end lesson_01_01b
+
+#begin lesson_01_01c
+class Example(renpy.Displayable):
+    def __init__(self, background, **kwargs): # <---
+        super().__init__(**kwargs)
+#end lesson_01_01c
+
+#begin lesson_01_01d
+class Example(renpy.Displayable):
+    def __init__(self, background, **kwargs):
+        super().__init__(**kwargs)
+        self.background = ImageReference(background) # <---
+#end lesson_01_01d
+
+#begin lesson_01_02a
+def render(self, width, height, st, at):
+#end lesson_01_02a
+
+#begin lesson_01_02b
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height) # <---
+    return new_render 
+#end lesson_01_02b
+
+#begin lesson_01_02c
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    return new_render # <---
+#end lesson_01_02c
+
+#begin lesson_01_02d
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    renpy.redraw(self, 0) # <---
+    return new_render 
+#end lesson_01_02d
+
+#begin lesson_01_02e
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at) # <---
+    renpy.redraw(self, 0)
+    return new_render 
+#end lesson_01_02e
+
+#begin lesson_01_02f
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at)
+    new_render.blit(child_render, (0, 0)) # <---
+    renpy.redraw(self, 0)
+    return new_render 
+#end lesson_01_02f
+
+#begin lesson_01_03
+
+class Example(renpy.Displayable):
+
+    def __init__(self, background, **kwargs):
+        super().__init__(**kwargs)
+        self.background = ImageReference(background)
+
+    def render(self, width, height, st, at):
+        new_render = renpy.Render(width, height)
+        child_render = renpy.render(self.background, width, height, st, at)
+        new_render.blit(child_render, (0, 0))
+        renpy.redraw(self, 0)
+        return new_render 
+#end lesson_01_03
+
+#begin lesson_01_04
+screen test_screen():
+    default game = Example('eileen happy')
+    add game
+
+label start:
+    call screen test_screen()
+    return
+#end lesson_01_04

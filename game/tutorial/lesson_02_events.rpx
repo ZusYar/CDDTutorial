@@ -1,0 +1,133 @@
+#begin lesson_02_01a
+def event(self, ev, x, y, st):
+    pass
+#end lesson_02_01a
+
+#begin lesson_02_01b
+def event(self, ev, x, y, st):
+    raise renpy.IgnoreEvent # <---
+#end lesson_02_01b
+
+#begin lesson_02_01c
+def event(self, ev, x, y, st):
+    if ev.type == pygame.KEYDOWN: # <---
+        pass
+    raise renpy.IgnoreEvent
+#end lesson_02_01c
+
+
+#begin lesson_02_01d
+import pygame # <--- somewhere under init python block
+
+def event(self, ev, x, y, st):
+    if ev.type == pygame.KEYDOWN:
+        pass
+    raise renpy.IgnoreEvent
+#end lesson_02_01d
+
+#begin lesson_02_01e
+import pygame
+
+def event(self, ev, x, y, st):
+    if ev.type == pygame.KEYDOWN:
+        if ev.key in (pygame.K_UP, pygame.K_RIGHT, pygame.K_DOWN, pygame.K_LEFT): # <--- one of the arrow keys pressed
+            pass
+    raise renpy.IgnoreEvent
+#end lesson_02_01e
+
+#begin lesson_02_02a
+def __init__(self, background, **kwargs):
+    super().__init__(**kwargs)
+    self.background = ImageReference(background)
+    self.pos = (0, 0) # <---
+#end lesson_02_02a
+
+#begin lesson_02_02b
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at)
+    new_render.blit(child_render, self.pos) # <---
+    renpy.redraw(self, 0)
+    return new_render 
+#end lesson_02_02b
+
+#begin lesson_02_02c
+def event(self, ev, x, y, st):
+    self.pos = (x, y) # <---
+    raise renpy.IgnoreEvent
+#end lesson_02_02c
+
+#begin lesson_02_02d
+def event(self, ev, x, y, st):
+    self.update_position(x, y) # <---
+    raise renpy.IgnoreEvent
+
+def update_position(self, x, y):
+    if x >= 0 and y >= 0:
+        self.pos = (x, y)
+#end lesson_02_02d
+
+#begin lesson_02_02e
+def event(self, ev, x, y, st):
+    if ev.type == pygame.MOUSEBUTTONUP: # <---
+        self.update_position(x, y)
+    raise renpy.IgnoreEvent
+#end lesson_02_02e
+
+#begin lesson_02_02f
+def event(self, ev, x, y, st):
+    if ev.type == pygame.MOUSEBUTTONUP:
+        if ev.button in (1, 3): # <---
+            self.update_position(x, y)
+    raise renpy.IgnoreEvent
+#end lesson_02_02f
+
+#begin lesson_02_03a
+import pygame
+
+class Example(renpy.Displayable):
+
+    def __init__(self, background, **kwargs):
+        super().__init__(**kwargs)
+        self.background = ImageReference(background)
+        self.pos = (0, 0)
+
+    def render(self, width, height, st, at):
+        new_render = renpy.Render(width, height)
+        child_render = renpy.render(self.background, width, height, st, at)
+        new_render.blit(child_render, self.pos)
+        renpy.redraw(self, 0)
+        return new_render 
+
+    def event(self, ev, x, y, st):
+        self.pos = (x, y)
+        raise renpy.IgnoreEvent
+#end lesson_02_03a
+
+#begin lesson_02_03b
+import pygame
+
+class Example(renpy.Displayable):
+
+    def __init__(self, background, **kwargs):
+        super().__init__(**kwargs)
+        self.background = ImageReference(background)
+        self.pos = (0, 0)
+
+    def render(self, width, height, st, at):
+        new_render = renpy.Render(width, height)
+        child_render = renpy.render(self.background, width, height, st, at)
+        new_render.blit(child_render, self.pos)
+        renpy.redraw(self, 0)
+        return new_render 
+
+    def event(self, ev, x, y, st):
+        if ev.type == pygame.MOUSEBUTTONUP:
+            if ev.button in (1, 3):
+                self.update_position(x, y)
+        raise renpy.IgnoreEvent
+
+    def update_position(self, x, y):
+        if x >= 0 and y >= 0:
+            self.pos = (x, y)
+#end lesson_02_03b
