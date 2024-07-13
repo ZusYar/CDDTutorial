@@ -4,5 +4,6 @@
 **.rpyc
 **.rpymc
 **.pyc
-**.save
 **.source
+**.save
+persistent
