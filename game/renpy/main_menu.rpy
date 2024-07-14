@@ -24,6 +24,7 @@ screen main_menu():
         textbutton 'Lesson 1 - First CDD' action Start('lesson_01_first_cdd')
         textbutton 'Lesson 2 - Events (Mouse)' action Start('lesson_02_events')
         textbutton 'Lesson 3 - Events (Keyboard)' action Start('lesson_03_kb_events')
+        textbutton 'Lesson 4 - Render methods' action Start('lesson_04_blit')
 
     text "...to be continued?" style "main_menu_tbc"
     text "[gui.about]" style "main_menu_about"

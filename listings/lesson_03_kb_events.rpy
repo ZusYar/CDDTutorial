@@ -1,7 +1,7 @@
 init python:
     import pygame
 
-    class Example_3(renpy.Displayable):
+    class Example(renpy.Displayable):
 
         def __init__(self, background, speed, **kwargs):
             super().__init__(**kwargs)

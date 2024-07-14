@@ -1,0 +1,205 @@
+#begin lesson_04_01a
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    new_render.place(self.background, 150, 25) # <---
+    return new_render 
+#end lesson_04_01a
+
+#begin lesson_04_01b
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at)
+#end lesson_04_01b
+
+#begin lesson_04_01c
+place(d, x=0, y=0, width=None, height=None, st=None, at=None, render=None, main=True)
+#end lesson_04_01c
+
+#begin lesson_04_01d
+place(d, x=0, y=0, width=None, height=None, st=None, at=None, render=None, main=True)
+get_size()
+#end lesson_04_01d
+
+#begin lesson_04_01e
+place(d, x=0, y=0, width=None, height=None, st=None, at=None, render=None, main=True)
+get_size()
+subsurface(rect)
+#end lesson_04_01e
+
+#begin lesson_04_01f
+place(d, x=0, y=0, width=None, height=None, st=None, at=None, render=None, main=True)
+get_size()
+subsurface(rect)
+blit(source, pos, main=True)
+#end lesson_04_01f
+
+
+#begin lesson_04_02a
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at) # <--
+
+    return new_render 
+#end lesson_04_02a
+
+#begin lesson_04_02b
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at)
+    
+    head = child_render.subsurface(0, 0, 300, 280) # <--
+
+    return new_render 
+#end lesson_04_02b
+
+#begin lesson_04_02c
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at)
+    
+    head = child_render.subsurface(0, 0, 300, 280)
+    new_render.blit(head, (self.x, self.y)) # <--
+
+    return new_render 
+#end lesson_04_02c
+
+#begin lesson_04_03a
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at)
+    
+    child_width, child_height = child_render.get_size() # <--
+
+    return new_render 
+#end lesson_04_03a
+
+#begin lesson_04_03b
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at)
+    
+    child_width, child_height = child_render.get_size()
+    half_width, half_height = child_width // 2, child_height // 2 # <--
+
+    return new_render 
+#end lesson_04_03b
+
+#begin lesson_04_03c
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at)
+    
+    child_width, child_height = child_render.get_size()
+    half_width, half_height = child_width // 2, child_height // 2
+    new_render.blit(child_render, (self.x - half_width, self.y - half_height)) # <--
+
+    return new_render 
+#end lesson_04_03c
+
+#begin lesson_04_04a
+def render(self, width, height, st, at):
+    ...
+
+    lt = child_render.subsurface((0, 0, half_width, half_height))
+    rt = child_render.subsurface((half_width, 0, half_width, half_height))
+    lb = child_render.subsurface((0, half_height, half_width, half_height))
+    rb = child_render.subsurface((half_width, half_height, half_width, half_height))
+
+    ...
+#end lesson_04_04a
+
+#begin lesson_04_04b
+def render(self, width, height, st, at):
+    ...
+
+    lt = child_render.subsurface((0, 0, half_width, half_height))
+    rt = child_render.subsurface((half_width, 0, half_width, half_height))
+    lb = child_render.subsurface((0, half_height, half_width, half_height))
+    rb = child_render.subsurface((half_width, half_height, half_width, half_height))
+
+    max_distance = 100
+    
+    ...
+#end lesson_04_04b
+
+#begin lesson_04_04c
+from math import sin
+
+def render(self, width, height, st, at):
+    ...
+
+    lt = child_render.subsurface((0, 0, half_width, half_height))
+    rt = child_render.subsurface((half_width, 0, half_width, half_height))
+    lb = child_render.subsurface((0, half_height, half_width, half_height))
+    rb = child_render.subsurface((half_width, half_height, half_width, half_height))
+
+    max_distance = 100
+    current_distance = abs(sin(st) * max_distance)
+    
+    ...
+#end lesson_04_04c
+
+#begin lesson_04_04d
+from math import sin
+
+def render(self, width, height, st, at):
+    ...
+
+    lt = child_render.subsurface((0, 0, half_width, half_height))
+    rt = child_render.subsurface((half_width, 0, half_width, half_height))
+    lb = child_render.subsurface((0, half_height, half_width, half_height))
+    rb = child_render.subsurface((half_width, half_height, half_width, half_height))
+
+    max_distance = 100
+    current_distance = abs(sin(st) * max_distance)
+    
+    # display the rectangles around the mouse pointer
+    new_render.blit(lt, (self.x - half_width - current_distance, self.y - half_height - current_distance))
+    new_render.blit(rt, (self.x + current_distance, self.y - half_height - current_distance))
+    new_render.blit(lb, (self.x - half_width - current_distance, self.y + current_distance))
+    new_render.blit(rb, (self.x + current_distance, self.y + current_distance))
+
+    ...
+#end lesson_04_04d
+
+
+#begin lesson_04_05a
+from math import sin
+
+class Example(renpy.Displayable):
+
+    def __init__(self, background, **kwargs):
+        super().__init__(**kwargs)
+        self.background = ImageReference(background)
+        self.x, self.y = 0, 0
+
+    def render(self, width, height, st, at):
+        new_render = renpy.Render(width, height)
+        child_render = renpy.render(self.background, width, height, st, at)
+
+        # size and half-size for convenience
+        child_width, child_height = child_render.get_size()
+        half_width, half_height = child_width // 2, child_height // 2
+
+        # split the render into 4 rectangles
+        lt = child_render.subsurface((0, 0, half_width, half_height))
+        rt = child_render.subsurface((half_width, 0, half_width, half_height))
+        lb = child_render.subsurface((0, half_height, half_width, half_height))
+        rb = child_render.subsurface((half_width, half_height, half_width, half_height))
+
+        max_distance = 100
+        current_distance = abs(sin(st) * max_distance)
+        
+        # display the rectangles around the mouse pointer
+        new_render.blit(lt, (self.x - half_width - current_distance, self.y - half_height - current_distance))
+        new_render.blit(rt, (self.x + current_distance, self.y - half_height - current_distance))
+        new_render.blit(lb, (self.x - half_width - current_distance, self.y + current_distance))
+        new_render.blit(rb, (self.x + current_distance, self.y + current_distance))
+
+        renpy.redraw(self, 0)
+        return new_render 
+
+    def event(self, ev, x, y, st):
+        if x >= 0 and y >= 0:
+            self.x, self.y = x, y
+        raise renpy.IgnoreEvent
+#end lesson_04_05a
