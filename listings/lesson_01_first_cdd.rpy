@@ -5,14 +5,10 @@ init python:
         def __init__(self, background, **kwargs):
             super().__init__(**kwargs)
             self.background = ImageReference(background)
-            self.width = width
-            self.height = height
     
         def render(self, width, height, st, at):
             new_render = renpy.Render(width, height)
-            child_render = renpy.render(self.background, width, height, st, at)
-            new_render.blit(child_render, (0, 0))
-            renpy.redraw(self, 0)
+            new_render.place(self.background, 150, 25)
             return new_render 
 
 screen test_screen():

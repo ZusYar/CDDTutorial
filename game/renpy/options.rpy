@@ -30,7 +30,9 @@ define config.version = "1.0"
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
-    author: AxelKong
+    This is a tutorial WIP, which goal is to explain the basics of ren'py CDD in a form of ren'py game.
+    If you have a feedback or interested in collaborating, feel free to contact me on renpy discord channel.
+    \n(DM: AxelKong).
 """)
 
 

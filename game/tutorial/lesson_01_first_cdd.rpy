@@ -2,7 +2,7 @@ label lesson_01_first_cdd:
     scene background
     show nvl
 
-    "So, {=blue}CDD{/blue}"
+    "So, {a=https://www.renpy.org/doc/html/cdd.html}CDD{/a}"
     extend " = Creator defined displayables."
     "The main idea is to give you as much control over the image as possible."
     "Therefore, the developer himself will have to specify:"
@@ -10,12 +10,11 @@ label lesson_01_first_cdd:
     "2) How the image reacts to external events: mouse and keyboard."
     "Once again: a single object on the screen is capable of drawing a collection of sprites, tracking projectiles, calculating collisions and responding to keyboard buttons."
     
-    hide sample_11
     nvl clear
 
     show example lesson_01_01a
        
-    "The first step is to create a new image class that inherits from {=blue}renpy.Displayable{/blue}."
+    "The first step is to create a new image class that inherits from {a=https://www.renpy.org/doc/html/cdd.html#renpy-displayable}renpy.Displayable{/a}."
 
     show example lesson_01_01b
 
@@ -30,7 +29,7 @@ label lesson_01_first_cdd:
 
     show example lesson_01_01d
 
-    "The only interesting thing here is {=blue}ImageReference{/blue}. Since I'm going to use an automatically registered image, I wrap the background in an ImageReference."
+    "The only interesting thing here is {=blue}ImageReference{/blue}. Since I'm going to use an automatically registered image, I wrap the background in ImageReference."
     
     hide example
     
@@ -42,63 +41,63 @@ label lesson_01_first_cdd:
 
     show example lesson_01_02a
 
-    "CDD has a {=blue}def render(){/blue} method for this."
+    "CDD has a {a=https://www.renpy.org/doc/html/cdd.html#renpy.Displayable.render}def render(){/a} method for this."
     "Consider the arguments:"
-    "width, height - obviously"
-    "st - shown timebase."
+    "width, height - the amount of space available to this displayable, in pixels."
+    "st - a float, the shown timebase, in seconds."
     "at - animation timebase. (This applies to displaying different pictures with the same tag, so it will not interest us in this context.)"
 
     nvl clear
     show example lesson_01_02b
 
-    "{=red}renpy.Render{/red} makes a new empty render."
-    "For the sake of clarity in this lesson, let's call it {b}new_render{/b}."
+    "{a=https://www.renpy.org/doc/html/cdd.html#renpy-render}renpy.Render{/a} makes a new empty render."
+    "For the sake of clarity in this lesson, let's call it {=green}new_render{/green}."
 
     show example lesson_01_02c
 
     "We will fill it with data, and when everything is ready, we will return it."
 
+    nvl clear
+    hide example
+    
+    "Now how do we fill the render with data?"
+
     show example lesson_01_02d
 
-    "{=red}renpy.redraw(){/red} causes CDD to redraw itself on the screen."
-
-    nvl clear
-    
-    "Now the main thing is not to get confused."
+    "Each render object has method {a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.place}place(){/a}, and most interesting arguments are as follows:"
+    "{=green}d{/green} - a displayable to render. We will use {=green}self.background{/self} for that."
+    "{=green}x, y{/green} - position to place the displayable. It's defaulted to 0, and we can provide it with something else."
 
     show example lesson_01_02e
 
-    "The {=red}renpy.render(){/red} function also returns a Render object, not empty this time, but with the currently needed image inside."
-    "Let's call this render {b}child_render{/b}."
-    "Assume that child_render needs to be rendered in the CDD at the top left corner - coordinates (0, 0)."
-    "To do this, each render object has {=blue}def blit(){/blue} method, which we will use often."
-    extend " Very often."
+    "The method, called on our {=green}new_render{/green} will automatically render {=green}self.background{/self} inside {=green}new_render{/green} (at the position x=150, y=25)."
 
-    show example lesson_01_02f
-
-    "{=red}new_render.blit(){/red} renders something inside new_render at the specified position."
-    
     hide example
     nvl clear
     
     "Let's take a break :-)"
     "I understand that you want to get results as quickly as possible, so let’s imagine that everything has already been done."
 
-    show example lesson_01_03 large
+    show example lesson_01_03a large
     nvl clear
 
     "Indeed, this is a completely viable CDD that does little but it works."
     "The only thing left to do is somehow show it in the game, so let's make a test screen."
 
-    nvl clear
-    show example lesson_01_04 small
+    hide example
+    show example lesson_01_03b small
 
-    "Let Eileen be the placeholder this time :-)"
+    "Let Eileen be our placeholder :-)"
     
     hide example
-    show screen lesson_01__test_screen()
+    nvl clear
+
+    call screen lesson_test_screen(
+        obj = lesson_01.Example('eileen happy'),
+        desc = _("Hurray, it's working!")
+    )
     
-    "Hurray, it's working! The lesson listing can be found in the listings folder."
+    "All the listings can be found in the listings folder."
 
     return
 
@@ -114,12 +113,5 @@ init python in lesson_01:
     
         def render(self, width, height, st, at):
             new_render = renpy.Render(width, height)
-            child_render = renpy.render(self.background, width, height, st, at)
-            new_render.blit(child_render, (0, 0))
-            renpy.redraw(self, 0)
+            new_render.place(self.background, 150, 25)
             return new_render 
-
-screen lesson_01__test_screen():
-    default game = lesson_01.Example('eileen happy')
-    add game
-    dismiss action MainMenu(confirm=False)

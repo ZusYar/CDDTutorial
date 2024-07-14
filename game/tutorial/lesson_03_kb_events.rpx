@@ -1,23 +1,21 @@
 #begin lesson_03_01a
-def __init__(self, background, **kwargs):
-    super().__init__(**kwargs)
-    self.background = ImageReference(background)
-    self.x, self.y = 0, 0 # <---
-#end lesson_03_01a
-
-#begin lesson_03_01b
 def event(self, ev, x, y, st):
     if ev.type == pygame.KEYDOWN:
+
         if ev.key == pygame.K_UP:
             self.y -= 1
+
         elif ev.key == pygame.K_RIGHT:
             self.x += 1
+
         elif ev.key == pygame.K_DOWN:
             self.y += 1
+
         elif ev.key == pygame.K_LEFT:
             self.x -= 1
+
     raise renpy.IgnoreEvent
-#end lesson_03_01b
+#end lesson_03_01a
 
 #begin lesson_03_02a
 def __init__(self, background, speed, **kwargs):
@@ -27,15 +25,14 @@ def __init__(self, background, speed, **kwargs):
 #end lesson_03_02a
 
 #begin lesson_03_02b
-def event(self, ev, x, y, st):
-#end lesson_03_02b
-
-#begin lesson_03_02c
-def __init__(self, background, speed, **kwargs):
+def __init__(self, background, speed, **kwargs):  # <---
     # ...
     # variables related to motion
     self.speed = speed
-    self.old_st = None  # <---
+#end lesson_03_02b
+
+#begin lesson_03_02c
+def event(self, ev, x, y, st):
 #end lesson_03_02c
 
 #begin lesson_03_02d
@@ -43,76 +40,97 @@ def __init__(self, background, speed, **kwargs):
     # ...
     # variables related to motion
     self.speed = speed
-    self.old_st = None
-    self.horizontal_shift, self.vertical_shift = 0, 0  # <---
+    self.old_st = None  # <---
 #end lesson_03_02d
 
 #begin lesson_03_02e
-def event(self, ev, x, y, st):
-    if ev.type == pygame.KEYDOWN:
-        if ev.key == pygame.K_UP:
-            self.vertical_shift = -1
-        elif ev.key == pygame.K_RIGHT:
-            self.horizontal_shift = 1
-        elif ev.key == pygame.K_DOWN:
-            self.vertical_shift = 1
-        elif ev.key == pygame.K_LEFT:
-            self.horizontal_shift = -1
-
-    raise renpy.IgnoreEvent
+def __init__(self, background, speed, **kwargs):
+    # ...
+    # variables related to motion
+    self.speed = speed
+    self.old_st = None
+    self.horizontal_shift, self.vertical_shift = 0, 0  # <---
 #end lesson_03_02e
 
-#begin lesson_03_02f
-def event(self, ev, x, y, st):
-    if ev.type == pygame.KEYDOWN:
-        if ev.key == pygame.K_UP:
-            self.vertical_shift = -1
-        elif ev.key == pygame.K_RIGHT:
-            self.horizontal_shift = 1
-        elif ev.key == pygame.K_DOWN:
-            self.vertical_shift = 1
-        elif ev.key == pygame.K_LEFT:
-            self.horizontal_shift = -1
-
-    if ev.type == pygame.KEYUP:
-        if ev.key == pygame.K_UP:
-            self.vertical_shift = 0
-        elif ev.key == pygame.K_RIGHT:
-            self.horizontal_shift = 0
-        elif ev.key == pygame.K_DOWN:
-            self.vertical_shift = 0
-        elif ev.key == pygame.K_LEFT:
-            self.horizontal_shift = 0
-
-    raise renpy.IgnoreEvent
-#end lesson_03_02f
-
-#begin lesson_03_02g
-def render(self, width, height, st, at):
-    # calculating new position from speed, time delta and directions
-    if self.old_st is None:
-        self.old_st = st
-    delta = st - self.old_st
-    self.old_st = st
-#end lesson_03_02g
-
-#begin lesson_03_02h
-def render(self, width, height, st, at):
-    # calculating new position from speed, time delta and directions
-    if self.old_st is None:
-        self.old_st = st
-    delta = st - self.old_st
-    self.old_st = st
-    self.x += self.speed * delta * self.horizontal_shift
-    self.y += self.speed * delta * self.vertical_shift
-#end lesson_03_02h
-
 #begin lesson_03_03a
-def event(self, ev, x, y, st):
-    keys = pygame.key.get_pressed()
+if ev.key == pygame.K_UP:
+    self.y -= 1
+
+#vvvvvvvvvvvvvvvvvvvvvvvvv
+
+if ev.key == pygame.K_UP:
+    self.vertical_shift = -1  # <---
 #end lesson_03_03a
 
 #begin lesson_03_03b
+def event(self, ev, x, y, st):
+    if ev.type == pygame.KEYDOWN:
+
+        if ev.key == pygame.K_UP:
+            self.vertical_shift = -1
+
+        elif ev.key == pygame.K_RIGHT:
+            self.horizontal_shift = 1  # <---
+
+        elif ev.key == pygame.K_DOWN:
+            self.vertical_shift = 1
+
+        elif ev.key == pygame.K_LEFT:
+            self.horizontal_shift = -1
+
+    raise renpy.IgnoreEvent
+#end lesson_03_03b
+
+#begin lesson_03_03c
+def event(self, ev, x, y, st):
+
+    if ev.type == pygame.KEYDOWN:
+        ...
+
+    if ev.type == pygame.KEYUP:  # <---
+
+        if ev.key == pygame.K_UP:
+            self.vertical_shift = 0
+
+        elif ev.key == pygame.K_RIGHT:
+            self.horizontal_shift = 0
+
+        elif ev.key == pygame.K_DOWN:
+            self.vertical_shift = 0
+
+        elif ev.key == pygame.K_LEFT:
+            self.horizontal_shift = 0
+
+    ...
+#end lesson_03_03c
+
+#begin lesson_03_03d
+def render(self, width, height, st, at):
+    # calculating new position from speed, time delta and directions
+    if self.old_st is None:
+        self.old_st = st
+    delta = st - self.old_st # <---
+    self.old_st = st
+#end lesson_03_03d
+
+#begin lesson_03_03e
+def render(self, width, height, st, at):
+    # calculating new position from speed, time delta and directions
+    if self.old_st is None:
+        self.old_st = st
+    delta = st - self.old_st
+    self.old_st = st
+
+    self.x += self.speed * delta * self.horizontal_shift # <---
+    self.y += self.speed * delta * self.vertical_shift
+#end lesson_03_03e
+
+#begin lesson_03_04a
+def event(self, ev, x, y, st):
+    keys = pygame.key.get_pressed()
+#end lesson_03_04a
+
+#begin lesson_03_04b
 def event(self, ev, x, y, st):
 
     keys = pygame.key.get_pressed()
@@ -120,17 +138,20 @@ def event(self, ev, x, y, st):
 
     if keys[pygame.K_UP]:
         self.vertical_shift -= 1
+
     if keys[pygame.K_RIGHT]:
         self.horizontal_shift += 1
+
     if keys[pygame.K_DOWN]:
         self.vertical_shift += 1
+
     if keys[pygame.K_LEFT]:
         self.horizontal_shift -= 1
 
     raise renpy.IgnoreEvent
-#end lesson_03_03b
+#end lesson_03_04b
 
-#begin lesson_03_03c
+#begin lesson_03_04c
 init python:
     import pygame
 
@@ -152,13 +173,13 @@ init python:
                 self.old_st = st
             delta = st - self.old_st
             self.old_st = st
+            
             self.x += self.speed * delta * self.horizontal_shift
             self.y += self.speed * delta * self.vertical_shift
             
             # rendering
             new_render = renpy.Render(width, height)
-            child_render = renpy.render(self.background, width, height, st, at)
-            new_render.blit(child_render, (self.x, self.y))
+            new_render.place(self.background, self.x, self.y)
             renpy.redraw(self, 0)
             return new_render 
 
@@ -169,10 +190,13 @@ init python:
 
             if keys[pygame.K_UP]:
                 self.vertical_shift -= 1
+            
             if keys[pygame.K_RIGHT]:
                 self.horizontal_shift += 1
+            
             if keys[pygame.K_DOWN]:
                 self.vertical_shift += 1
+            
             if keys[pygame.K_LEFT]:
                 self.horizontal_shift -= 1
 
@@ -185,4 +209,4 @@ screen test_screen():
 label start:
     call screen test_screen()
     return
-#end lesson_03_03c
+#end lesson_03_04c

@@ -1,7 +1,7 @@
 init python:
     import pygame
 
-    class Example(renpy.Displayable):
+    class Example_3(renpy.Displayable):
 
         def __init__(self, background, speed, **kwargs):
             super().__init__(**kwargs)
@@ -19,13 +19,13 @@ init python:
                 self.old_st = st
             delta = st - self.old_st
             self.old_st = st
+            
             self.x += self.speed * delta * self.horizontal_shift
             self.y += self.speed * delta * self.vertical_shift
             
             # rendering
             new_render = renpy.Render(width, height)
-            child_render = renpy.render(self.background, width, height, st, at)
-            new_render.blit(child_render, (self.x, self.y))
+            new_render.place(self.background, self.x, self.y)
             renpy.redraw(self, 0)
             return new_render 
 
@@ -36,10 +36,13 @@ init python:
 
             if keys[pygame.K_UP]:
                 self.vertical_shift -= 1
+            
             if keys[pygame.K_RIGHT]:
                 self.horizontal_shift += 1
+            
             if keys[pygame.K_DOWN]:
                 self.vertical_shift += 1
+            
             if keys[pygame.K_LEFT]:
                 self.horizontal_shift -= 1
 

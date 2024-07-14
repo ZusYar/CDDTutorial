@@ -6,13 +6,11 @@ init python:
         def __init__(self, background, **kwargs):
             super().__init__(**kwargs)
             self.background = ImageReference(background)
-            self.pos = (0, 0)
+            self.x, self.y = 0, 0
 
         def render(self, width, height, st, at):
             new_render = renpy.Render(width, height)
-            child_render = renpy.render(self.background, width, height, st, at)
-            new_render.blit(child_render, self.pos)
-            renpy.redraw(self, 0)
+            new_render.place(self.background, self.x, self.y)
             return new_render 
 
         def event(self, ev, x, y, st):
@@ -23,7 +21,8 @@ init python:
 
         def update_position(self, x, y):
             if x >= 0 and y >= 0:
-                self.pos = (x, y)
+                self.x, self.y = x, y
+                renpy.redraw(self, 0)
 
 screen test_screen():
     default game = Example('eileen happy')
