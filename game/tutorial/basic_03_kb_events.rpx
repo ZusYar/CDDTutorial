@@ -1,4 +1,4 @@
-#begin lesson_03_01a
+#begin basic_03_01a
 def event(self, ev, x, y, st):
     if ev.type == pygame.KEYDOWN:
 
@@ -15,44 +15,44 @@ def event(self, ev, x, y, st):
             self.x -= 1
 
     raise renpy.IgnoreEvent
-#end lesson_03_01a
+#end basic_03_01a
 
-#begin lesson_03_02a
+#begin basic_03_02a
 def __init__(self, background, speed, **kwargs):
     # ...
     # variables related to motion
     self.speed = speed  # <---
-#end lesson_03_02a
+#end basic_03_02a
 
-#begin lesson_03_02b
+#begin basic_03_02b
 def __init__(self, background, speed, **kwargs):  # <---
     # ...
     # variables related to motion
     self.speed = speed
-#end lesson_03_02b
+#end basic_03_02b
 
-#begin lesson_03_02c
+#begin basic_03_02c
 def event(self, ev, x, y, st):
-#end lesson_03_02c
+#end basic_03_02c
 
-#begin lesson_03_02d
+#begin basic_03_02d
 def __init__(self, background, speed, **kwargs):
     # ...
     # variables related to motion
     self.speed = speed
     self.old_st = None  # <---
-#end lesson_03_02d
+#end basic_03_02d
 
-#begin lesson_03_02e
+#begin basic_03_02e
 def __init__(self, background, speed, **kwargs):
     # ...
     # variables related to motion
     self.speed = speed
     self.old_st = None
     self.horizontal_shift, self.vertical_shift = 0, 0  # <---
-#end lesson_03_02e
+#end basic_03_02e
 
-#begin lesson_03_03a
+#begin basic_03_03a
 if ev.key == pygame.K_UP:
     self.y -= 1
 
@@ -60,9 +60,9 @@ if ev.key == pygame.K_UP:
 
 if ev.key == pygame.K_UP:
     self.vertical_shift = -1  # <---
-#end lesson_03_03a
+#end basic_03_03a
 
-#begin lesson_03_03b
+#begin basic_03_03b
 def event(self, ev, x, y, st):
     if ev.type == pygame.KEYDOWN:
 
@@ -79,9 +79,9 @@ def event(self, ev, x, y, st):
             self.horizontal_shift = -1
 
     raise renpy.IgnoreEvent
-#end lesson_03_03b
+#end basic_03_03b
 
-#begin lesson_03_03c
+#begin basic_03_03c
 def event(self, ev, x, y, st):
 
     if ev.type == pygame.KEYDOWN:
@@ -102,18 +102,18 @@ def event(self, ev, x, y, st):
             self.horizontal_shift = 0
 
     ...
-#end lesson_03_03c
+#end basic_03_03c
 
-#begin lesson_03_03d
+#begin basic_03_03d
 def render(self, width, height, st, at):
     # calculating new position from speed, time delta and directions
     if self.old_st is None:
         self.old_st = st
     delta = st - self.old_st # <---
     self.old_st = st
-#end lesson_03_03d
+#end basic_03_03d
 
-#begin lesson_03_03e
+#begin basic_03_03e
 def render(self, width, height, st, at):
     # calculating new position from speed, time delta and directions
     if self.old_st is None:
@@ -123,14 +123,14 @@ def render(self, width, height, st, at):
 
     self.x += self.speed * delta * self.horizontal_shift # <---
     self.y += self.speed * delta * self.vertical_shift
-#end lesson_03_03e
+#end basic_03_03e
 
-#begin lesson_03_04a
+#begin basic_03_04a
 def event(self, ev, x, y, st):
     keys = pygame.key.get_pressed()
-#end lesson_03_04a
+#end basic_03_04a
 
-#begin lesson_03_04b
+#begin basic_03_04b
 def event(self, ev, x, y, st):
 
     keys = pygame.key.get_pressed()
@@ -149,9 +149,9 @@ def event(self, ev, x, y, st):
         self.horizontal_shift -= 1
 
     raise renpy.IgnoreEvent
-#end lesson_03_04b
+#end basic_03_04b
 
-#begin lesson_03_04c
+#begin basic_03_04c
 init python:
     import pygame
 
@@ -159,7 +159,7 @@ init python:
 
         def __init__(self, background, speed, **kwargs):
             super().__init__(**kwargs)
-            self.background = ImageReference(background)
+            self.background = renpy.displayable(background)
             self.x, self.y = 0, 0
 
             # variables related to motion            
@@ -209,4 +209,4 @@ screen test_screen():
 label start:
     call screen test_screen()
     return
-#end lesson_03_04c
+#end basic_03_04c

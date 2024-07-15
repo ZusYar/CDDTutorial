@@ -1,68 +1,68 @@
-#begin lesson_01_01a
+#begin basic_01_01a
 class Example(renpy.Displayable):
     pass
-#end lesson_01_01a
+#end basic_01_01a
 
-#begin lesson_01_01b
+#begin basic_01_01b
 class Example(renpy.Displayable):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-#end lesson_01_01b
+#end basic_01_01b
 
-#begin lesson_01_01c
+#begin basic_01_01c
 class Example(renpy.Displayable):
     def __init__(self, background, **kwargs): # <---
         super().__init__(**kwargs)
-#end lesson_01_01c
+#end basic_01_01c
 
-#begin lesson_01_01d
+#begin basic_01_01d
 class Example(renpy.Displayable):
     def __init__(self, background, **kwargs):
         super().__init__(**kwargs)
-        self.background = ImageReference(background) # <---
-#end lesson_01_01d
+        self.background = renpy.displayable(background) # <---
+#end basic_01_01d
 
-#begin lesson_01_02a
+#begin basic_01_02a
 def render(self, width, height, st, at):
-#end lesson_01_02a
+#end basic_01_02a
 
-#begin lesson_01_02b
+#begin basic_01_02b
 def render(self, width, height, st, at):
     new_render = renpy.Render(width, height) # <---
     return new_render 
-#end lesson_01_02b
+#end basic_01_02b
 
-#begin lesson_01_02c
+#begin basic_01_02c
 def render(self, width, height, st, at):
     new_render = renpy.Render(width, height)
     return new_render # <---
-#end lesson_01_02c
+#end basic_01_02c
 
-#begin lesson_01_02d
+#begin basic_01_02d
 place(d, x=0, y=0, width=None, height=None, st=None, at=None, render=None, main=True)
-#end lesson_01_02d
+#end basic_01_02d
 
-#begin lesson_01_02e
+#begin basic_01_02e
 def render(self, width, height, st, at):
     new_render = renpy.Render(width, height)
     new_render.place(self.background, 150, 25) # <---
     return new_render 
-#end lesson_01_02e
+#end basic_01_02e
 
-#begin lesson_01_03a
+#begin basic_01_03a
 class Example(renpy.Displayable):
 
     def __init__(self, background, **kwargs):
         super().__init__(**kwargs)
-        self.background = ImageReference(background)
+        self.background = renpy.displayable(background)
 
     def render(self, width, height, st, at):
         new_render = renpy.Render(width, height)
         new_render.place(self.background, 150, 25)
         return new_render 
-#end lesson_01_03a
+#end basic_01_03a
 
-#begin lesson_01_03b
+#begin basic_01_03b
 screen test_screen():
     default game = Example('eileen happy')
     add game
@@ -70,4 +70,4 @@ screen test_screen():
 label start:
     call screen test_screen()
     return
-#end lesson_01_03b
+#end basic_01_03b

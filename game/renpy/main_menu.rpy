@@ -21,10 +21,16 @@ screen main_menu():
         xoffset 20
         yoffset 20
         label "Basics"
-        textbutton 'Lesson 1 - First CDD' action Start('lesson_01_first_cdd')
-        textbutton 'Lesson 2 - Events (Mouse)' action Start('lesson_02_events')
-        textbutton 'Lesson 3 - Events (Keyboard)' action Start('lesson_03_kb_events')
-        textbutton 'Lesson 4 - Render methods' action Start('lesson_04_blit')
+        textbutton 'Lesson 1 - First CDD' action Start('basic_01_first_cdd')
+        textbutton 'Lesson 2 - Events (Mouse)' action Start('basic_02_events')
+        textbutton 'Lesson 3 - Events (Keyboard)' action Start('basic_03_kb_events')
+        textbutton 'Lesson 4 - Render methods' action Start('basic_04_blit')
+        textbutton 'Lesson 5 - Transform' action Start('basic_05_transform')
+        text "{space=200}???" style 'unavailable'
+        
+        label "Intermediate"
+        #text 'Lesson 1 - Delegated routine' style 'unavailable' # action Start('intermediate_01_children')
+        text "{space=200}???" style 'unavailable'
 
     text "...to be continued?" style "main_menu_tbc"
     text "[gui.about]" style "main_menu_about"
@@ -65,3 +71,6 @@ style main_menu_about:
     xalign 1.0
     xoffset -40
     text_align 1.0
+ 
+style unavailable is text:
+    color gui.muted_color

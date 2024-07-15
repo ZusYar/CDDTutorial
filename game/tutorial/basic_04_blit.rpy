@@ -1,10 +1,10 @@
-label lesson_04_blit:
+label basic_04_blit:
     scene background
     show nvl
 
 label .section_01:
 
-    show example lesson_04_01a
+    show example basic_04_01a
 
     "In previous lessons we used {a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.place}place(){/a} to fill the render."
     "This was convenient because the method automatically renders the image and places it at the specified coordinates."
@@ -13,7 +13,7 @@ label .section_01:
     "In this lesson we will look at methods that allow you to cope with this task."
 
     nvl clear
-    show example lesson_04_01b
+    show example basic_04_01b
 
     "Now the most important thing is not to get confused. Compare these two commands."
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.Render}renpy.Render{/a} is the class we use to create a new render."
@@ -22,19 +22,19 @@ label .section_01:
     "What can this class do? Let's look at the documentation and observe a few methods."
 
     nvl clear
-    show example lesson_04_01c
+    show example basic_04_01c
 
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.place}place(){/a} - A familiar method that places another (unrendered) image in it."
 
-    show example lesson_04_01d
+    show example basic_04_01d
 
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.get_size}get_size(){/a} - Returns a (width, height) tuple giving the size of this render."
 
-    show example lesson_04_01e
+    show example basic_04_01e
     
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.subsurface}subsurface(){/a} - Returns a render consisting of a rectangle cut out of this render."
 
-    show example lesson_04_01f
+    show example basic_04_01f
     
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.blit}blit(){/a} - Draws another render object into this render object."
 
@@ -46,24 +46,26 @@ label .section_01:
 
 label .section_02:
 
-    show example lesson_04_02a
+    show example basic_04_02a
 
     "As our first step we'll render {=green}background{/green} as a {=green}child_render{/green}."
 
-    show example lesson_04_02b
+    show example basic_04_02b
+    show screen test_screen('eileen_head_example')
 
     "Now we can actually manipulate this new render. For example, we can crop her head (sorry, Eileen)"
 
-    show example lesson_04_02c
+    show example basic_04_02c
 
     extend" and blit the head into the mouse position."
     "Note, that {=green}head{/green} is a Render object just as well."
 
+    hide screen test_screen
     hide example
     nvl clear
 
-    call screen lesson_test_screen(
-        obj = lesson_04.Example_1('eileen concerned'),
+    call screen test_screen(
+        obj = basic_04.Example_1('eileen concerned'),
         desc = _("Woooohooo")
     )
 
@@ -72,59 +74,66 @@ label .section_03:
     "Okay, this was too easy."
     "Let's correct the way we move the image and make its center match the mouse pointer position."
 
-    show example lesson_04_03a
+    show example basic_04_03a
+    show screen test_screen('eileen_size_example')
 
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.get_size}get_size(){/a} will bring us the size of the image."
 
-    show example lesson_04_03b
+    show example basic_04_03b
+    show screen test_screen('eileen_halfsize_example')
 
     "Then we could calculate half-size just for our convenience."
 
-    show example lesson_04_03c
+    show example basic_04_03c
 
     "All we need to do now is simply offset the position by these values when we blit the {=green}child_render{/green}."
     "And we're ready to go."
 
+    hide screen test_screen
     hide example
     nvl clear
 
-    call screen lesson_test_screen(
-        obj = lesson_04.Example_2('eileen concerned'),
+    call screen test_screen(
+        obj = basic_04.Example_2('eileen concerned'),
         desc = _("Nice")
     )
 
 label .section_04:
 
     "Still not satisfied?"
+
+    show screen test_screen('eileen_rectangles')
+
     "How about we split the image in 4 rectangles and make it explode around the mouse pointer? Does it sound like fun? Let's find out."
 
     nvl clear
-    show example lesson_04_04a large
+    show example basic_04_04a large
+    hide screen test_screen
 
     "In addition to already mentioned steps, we simply make 4 new Render objects representing the 4 rectangles. We use half sizes for it."
 
-    show example lesson_04_04b
+    show example basic_04_04b
 
     "Then we declare the maximum distance for the rectangles to move avay from mouse pointer."
 
-    show example lesson_04_04c
+    show example basic_04_04c
 
-    "Current distance can be calculated for example with use of {a=https://www.w3schools.com/python/ref_math_sin.asp}sine function{/a} from current {=green}st{/green} value, and we should import math library."
+    "Current distance can be calculated for example with use of {a=https://www.w3schools.com/python/ref_math_sin.asp}sine function{/a} from current {=green}st{/green} value (need to import math library)."
 
     nvl clear
-    show example lesson_04_04d
+    show example basic_04_04d
 
     "Last chunk of maths for now, and we place the rectangles accordignly to their new positions."
 
-    show example lesson_04_05a
+    show example basic_04_05a
 
     "Examine the listing and test the result. The lesson is over :D."
 
     hide example
     nvl clear
 
-    call screen lesson_test_screen(
-        obj = lesson_04.Example_3('eileen concerned'),
+    call screen test_screen(
+        obj = basic_04.Example_3('eileen concerned'),
         desc = _("What the...")
     )
     
@@ -132,8 +141,7 @@ label .section_04:
 
 ############ DATA ##############
 
-init python in lesson_04:
-    from renpy.display.image import ImageReference
+init python in basic_04:
     import pygame
     from math import sin
 
@@ -141,7 +149,7 @@ init python in lesson_04:
 
         def __init__(self, background, **kwargs):
             super().__init__(**kwargs)
-            self.background = ImageReference(background)
+            self.background = renpy.displayable(background)
             self.x, self.y = 0, 0
 
         def render(self, width, height, st, at):
@@ -163,7 +171,7 @@ init python in lesson_04:
 
         def __init__(self, background, **kwargs):
             super().__init__(**kwargs)
-            self.background = ImageReference(background)
+            self.background = renpy.displayable(background)
             self.x, self.y = 0, 0
 
         def render(self, width, height, st, at):
@@ -185,12 +193,11 @@ init python in lesson_04:
                 self.x, self.y = x, y
             raise renpy.IgnoreEvent
 
-
     class Example_3(renpy.Displayable):
 
         def __init__(self, background, **kwargs):
             super().__init__(**kwargs)
-            self.background = ImageReference(background)
+            self.background = renpy.displayable(background)
             self.x, self.y = 0, 0
 
         def render(self, width, height, st, at):
@@ -223,3 +230,8 @@ init python in lesson_04:
             if x >= 0 and y >= 0:
                 self.x, self.y = x, y
             raise renpy.IgnoreEvent
+
+image eileen_head_example = LayeredImage(attributes=[Solid('#69c6f177', xsize=300, ysize=280), Transform('eileen concerned', matrixcolor=SaturationMatrix(0.0)), Text('xsize=300\nysize=280', style='note')])
+image eileen_size_example = LayeredImage(attributes=[Solid('#69c6f177', xsize=320, ysize=720), Transform('eileen concerned', matrixcolor=SaturationMatrix(0.0)), Text('Full size:\n320 x 720', style='note')])
+image eileen_halfsize_example = LayeredImage(attributes=[Solid('#69c6f177', xsize=320, ysize=720), Transform('eileen concerned', matrixcolor=SaturationMatrix(0.0)), Solid('#f169cf77', xsize=160, ysize=360), Text('Half size:\n160 x 360', style='note')])
+image eileen_rectangles = LayeredImage(attributes=[Transform('eileen concerned', matrixcolor=SaturationMatrix(0.0)), Solid('#f169cf77', xsize=160, ysize=360), Solid('#69c6f177', xsize=160, ysize=360, xpos=160), Solid('#69f18b77', xsize=160, ysize=360, ypos=360), Solid('#d4f16977', xsize=160, ysize=360, xpos=160, ypos=360), Text('LT', style='note'), Text('RT', style='note', xpos=160), Text('LB', style='note', ypos=360), Text('RB', style='note', xpos=160, ypos=360)])

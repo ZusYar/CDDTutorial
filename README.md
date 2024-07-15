@@ -5,6 +5,8 @@ Basics:
 Lesson 1 - First CDD
 Lesson 2 - Events (Mouse)
 Lesson 3 - Events (Keyboard)
+Lesson 4 - Render methods
+Lesson 5 - Transform
 ... to be continued?
 
 ```

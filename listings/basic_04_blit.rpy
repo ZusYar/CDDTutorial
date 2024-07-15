@@ -6,7 +6,7 @@ init python:
 
         def __init__(self, background, **kwargs):
             super().__init__(**kwargs)
-            self.background = ImageReference(background)
+            self.background = renpy.displayable(background)
             self.x, self.y = 0, 0
 
         def render(self, width, height, st, at):

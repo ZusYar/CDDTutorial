@@ -1,0 +1,151 @@
+#begin basic_05_01a
+class Example(renpy.Displayable):
+
+    def __init__(self, background, **kwargs):
+        super().__init__(**kwargs)
+        self.background = renpy.displayable(background)
+        self.x, self.y = 0, 0
+
+    def render(self, width, height, st, at):
+        new_render = renpy.Render(width, height)
+        child_render = renpy.render(self.background, width, height, st, at)
+
+        # size and half-size for convenience
+        child_width, child_height = child_render.get_size()
+        half_width, half_height = child_width // 2, child_height // 2
+
+        # display the image with half-size offset
+        new_render.blit(child_render, (self.x - half_width, self.y - half_height))
+
+        renpy.redraw(self, 0)
+        return new_render 
+
+    def event(self, ev, x, y, st):
+        if x >= 0 and y >= 0:
+            self.x, self.y = x, y
+        raise renpy.IgnoreEvent
+#end basic_05_01a
+
+#begin basic_05_01b
+def render(self, width, height, st, at):
+    ...
+
+    child_render = renpy.render(self.background, width, height, st, at)
+
+    # size and half-size for convenience
+    child_width, child_height = child_render.get_size()
+    half_width, half_height = child_width // 2, child_height // 2
+
+    # display the image with half-size offset
+    new_render.blit(child_render, (self.x - half_width, self.y - half_height))
+
+    ...
+#end basic_05_01b
+
+
+#begin basic_05_01c
+def render(self, width, height, st, at):
+    ...
+
+    image = Transform(self.background, zoom=0.5) # <---
+    child_render = renpy.render(image, width, height, st, at)
+
+    # size and half-size for convenience
+    child_width, child_height = child_render.get_size()
+    half_width, half_height = child_width // 2, child_height // 2
+
+    # display the image with half-size offset
+    new_render.blit(child_render, (self.x - half_width, self.y - half_height))
+
+    ...
+#end basic_05_01c
+
+#begin basic_05_01d
+def render(self, width, height, st, at):
+    ...
+
+    image = Transform(self.background, zoom=0.5)-
+    child_render = renpy.render(image, width, height, st, at) # <---
+
+    # size and half-size for convenience
+    child_width, child_height = child_render.get_size()
+    half_width, half_height = child_width // 2, child_height // 2
+
+    # display the image with half-size offset
+    new_render.blit(child_render, (self.x - half_width, self.y - half_height))
+
+    ...
+#end basic_05_01d
+
+#begin basic_05_02a
+def render(self, width, height, st, at):
+    ...
+
+    image = Transform(self.background, zoom=0.5, crop=(0.25, 0.0, 0.5, 1.0), alpha=0.75, blur=8.0, matrixcolor=SaturationMatrix(0.5)) # <---
+    child_render = renpy.render(image, width, height, st, at)
+
+    ...
+#end basic_05_02a
+
+#begin basic_05_03a
+transform sample_transform:
+    yzoom -1
+    alpha 0.75
+    blur 8.0
+#end basic_05_03a
+
+#begin basic_05_03b
+transform sample_transform:
+    zoom 0.5
+    parallel:
+        ease 3.0 blur 4.0
+        ease 3.0 blur 0.0
+        repeat
+    parallel:
+        linear 1.0 alpha 0.1
+        linear 1.0 alpha 1.0
+        repeat
+    parallel:
+        linear 0.5 matrixcolor TintMatrix('#F00')
+        linear 0.5 matrixcolor TintMatrix('#0F0')
+        linear 0.5 matrixcolor TintMatrix('#00F')
+        repeat
+    parallel:
+        rotate 0
+        linear 3.5 rotate 360
+        repeat
+#end basic_05_03b
+
+#begin basic_05_03c
+def render(self, width, height, st, at):
+    ...
+
+    image = sample_transform(self.background) # <---
+    child_render = renpy.render(image, width, height, st, at)
+
+    ...
+#end basic_05_03c
+
+#begin basic_05_03d
+def render(self, width, height, st, at):
+    ...
+
+    image = At(self.background, sample_transform) # <---
+    child_render = renpy.render(image, width, height, st, at)
+
+    ...
+#end basic_05_03d
+
+#begin basic_05_03e
+def __init__(self, background, **kwargs):
+    super().__init__(**kwargs)
+    self.image = At(renpy.displayable(background), sample_transform) # <---
+    self.x, self.y = 0, 0
+
+def render(self, width, height, st, at):
+    ...
+
+    child_render = renpy.render(self.image, width, height, st, at) # <---
+
+    ...
+#end basic_05_03e

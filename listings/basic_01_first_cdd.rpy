@@ -4,7 +4,7 @@ init python:
     
         def __init__(self, background, **kwargs):
             super().__init__(**kwargs)
-            self.background = ImageReference(background)
+            self.background = renpy.displayable(background)
     
         def render(self, width, height, st, at):
             new_render = renpy.Render(width, height)
