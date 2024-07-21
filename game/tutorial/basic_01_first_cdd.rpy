@@ -3,7 +3,7 @@ label basic_01_first_cdd:
     show nvl
 
     "So, {a=https://www.renpy.org/doc/html/cdd.html}CDD{/a}"
-    extend " = Creator defined displayables."
+    extend " = Creator-Defined Displayables."
     "The main idea is to give you as much control over the image as possible."
     "Therefore, the developer himself will have to specify:"
     "1) What, where and when to display."

@@ -29,8 +29,12 @@ screen main_menu():
         text "{space=200}???" style 'unavailable'
         
         label "Intermediate"
-        #text 'Lesson 1 - Delegated routine' style 'unavailable' # action Start('intermediate_01_children')
+        textbutton 'Lesson 1 - Canvas' action Start('intermediate_01_canvas')
+        #text 'Lesson 2 - Delegated routine' style 'unavailable' # action Start('intermediate_02_children')
         text "{space=200}???" style 'unavailable'
+
+        #label "Test feature"
+        #textbutton 'Test Lesson' action Start('test_lesson')
 
     text "...to be continued?" style "main_menu_tbc"
     text "[gui.about]" style "main_menu_about"
