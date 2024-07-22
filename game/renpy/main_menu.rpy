@@ -33,8 +33,8 @@ screen main_menu():
         textbutton 'Lesson 2 - CDD children' action Start('intermediate_02_cdd_children')
         text "{space=200}???" style 'unavailable'
 
-        label "Test feature"
-        textbutton 'Test Lesson' action Start('test_lesson')
+        #label "Test feature"
+        #textbutton 'Test Lesson' action Start('test_lesson')
 
     text "...to be continued?" style "main_menu_tbc"
     text "[gui.about]" style "main_menu_about"

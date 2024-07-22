@@ -7,6 +7,11 @@ Lesson 2 - Events (Mouse)
 Lesson 3 - Events (Keyboard)
 Lesson 4 - Render methods
 Lesson 5 - Transform
+
+Intermediate:
+Lesson 1 - Canvas
+Lesson 2 - CDD children
+
 ... to be continued?
 
 ```
