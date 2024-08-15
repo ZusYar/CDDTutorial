@@ -192,12 +192,16 @@ label .section_05:
 label .section_06:
 
     "Are we done yet? Well... How about doing something practical. I swear, this will be the last part of the lesson :D"
+
+    show screen test_screen('hide_n_seek_concept')
+
     "Here's the idea. Eileen will hide somewhere and we'll search her behind the fog with a flashlight."
 
     show example intermediate_03_06a small
 
     "Proposed displayable arguments will be as follows:\nsolid color behind Eileen\n\"fog\" = foreground displayable\n80 pix = flashlight circle radius."
 
+    hide screen test_screen
     hide example
     nvl clear
     show example intermediate_03_06b large
@@ -572,4 +576,14 @@ image eileen_heads_example = LayeredImage(attributes=[
     Transform(Text('vhappy', style='note'), xpos=212),
     Transform(Solid('#f1bb6977', xsize=300, ysize=180), ypos=180),
     Transform('eileen happy', crop=(0, 360, 300, 360), zoom=0.5, ypos=180, xpos=75),
+    ])
+
+image hide_n_seek_concept = LayeredImage(attributes=[
+    Solid('#d8ddc1', xsize=300, ysize=240),
+    Transform(Text('solid', style='note'), xpos=4),
+    Transform(Solid('#dfe2db33', xsize=300, ysize=240), xpos=8, ypos=8),
+    Transform('eileen happy', zoom=0.2, xpos=50, ypos=26),
+    Transform(Text('eileen', style='note'), xpos=64, ypos=8),
+    Transform('fog', xsize=300, ysize=240, xpos=40, ypos=40, alpha=0.5),
+    Transform(Text('fog', style='note'), xpos=120, ypos=40),
     ])
