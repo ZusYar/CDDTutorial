@@ -11,21 +11,21 @@ label .section_01:
     nvl clear
 
     "Let's look at the list of the methods:"
-    "{=blue}line{/blue} - draw a straight line"
-    "{=blue}lines{/blue} - draw multiple contiguous straight line segments"
-    "{=blue}circle{/blue} - draw a circle"
-    "{=blue}rect{/blue} - draw a rectangle"
-    "{=blue}polygon{/blue} - draw a polygon"
-    "{b}arc{/a} and {b}ellipse{/b} are not supported in ren'py."
+    "{=blue}line{/} - draw a straight line"
+    "{=blue}lines{/} - draw multiple contiguous straight line segments"
+    "{=blue}circle{/} - draw a circle"
+    "{=blue}rect{/} - draw a rectangle"
+    "{=blue}polygon{/} - draw a polygon"
+    "{b}arc{/b} and {b}ellipse{/b} are not supported in ren'py."
 
     nvl clear
 
     "Before we draw the shapes, let's figure out how to specify colors, because you can't draw anything without it."
     "This could be a string like '#RGBA', a tuple of 3 or 4 elements of numbers from 0 to 255, or a {a=https://www.pygame.org/docs/ref/color.html}pygame.Color{/a} object."
-    "Although a detailed analysis of pygame's capabilities is beyond the scope of this article, I will mention that the class provides named access to color fields, for example {=green}color.r{/green}, {=green}color.g{/green}"
-    extend "; it allows you conversions to other color spaces such as {=green}HSLA{/green}, {=green}CMY{/green}"
+    "Although a detailed analysis of pygame's capabilities is beyond the scope of this article, I will mention that the class provides named access to color fields, for example {=green}color.r{/}, {=green}color.g{/}"
+    extend "; it allows you conversions to other color spaces such as {=green}HSLA{/}, {=green}CMY{/}"
     extend "; it even supports simple mathematical color manipulations such as +, -, *, //, \%, ~."
-    "Example: {=green}'#10C010'{/green} is equivalent to {=blue}pygame.Color(16, 192, 16){/blue}."
+    "Example: {=green}'#10C010'{/} is equivalent to {=blue}pygame.Color(16, 192, 16){/}."
     "Example: (50, 50, 50) + (50, 50, 50) = (100, 100, 100)."
 
     nvl clear
@@ -34,26 +34,26 @@ label .section_01:
 
     show example intermediate_01_01a large
 
-    "First thing to do is accessing the canvas, and any {=blue}Render{/blue} object has the {a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.canvas}canvas(){/a} method."
+    "First thing to do is accessing the canvas, and any {=blue}Render{/} object has the {a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.canvas}canvas(){/a} method."
 
     show example intermediate_01_01b
 
-    "With this code we draw a yellow line from (0, 0) to (1280, 720). Note that {=blue}line(){/blue} method takes an optional {=green}width{/green} argument."
+    "With this code we draw a yellow line from (0, 0) to (1280, 720). Note that {=blue}line(){/} method takes an optional {=green}width{/} argument."
 
     nvl clear
     show example intermediate_01_01c
 
-    "{=blue}lines(){/blue} method is a bit different. As you can see, its arguments are: {=green}color{/green},{w} {=green}closed{/green} - a bool signifying an additional line segment between the first and last points, {w} {=green}points{/green} - a sequence of 2 or more (x, y) coordinates, {w} and {=green}width{/green}, used for line thickness."
+    "{=blue}lines(){/} method is a bit different. As you can see, its arguments are: {=green}color{/},{w} {=green}closed{/} - a bool signifying an additional line segment between the first and last points, {w} {=green}points{/} - a sequence of 2 or more (x, y) coordinates, {w} and {=green}width{/}, used for line thickness."
 
     show example intermediate_01_01d
 
-    "(Unfortunately, ren'py doesn't fully match the pygame version, {=green}points{/green} is {=green}pointlist{/green} in ren'py, that is, if you want to name positional args.)"
+    "(Unfortunately, ren'py doesn't fully match the pygame version, {=green}points{/} is {=green}pointlist{/} in ren'py, that is, if you want to name positional args.)"
 
     nvl clear
     show example intermediate_01_01e
 
-    "Next, we'll easily add a couple of circles, but let's make {=blue}pygame.Color{/blue} instance this time."
-    "Note, how we can draw only a circle's border with use of {=green}width{/green}."
+    "Next, we'll easily add a couple of circles, but let's make {=blue}pygame.Color{/} instance this time."
+    "Note, how we can draw only a circle's border with use of {=green}width{/}."
 
     nvl clear
     show example intermediate_01_01f
@@ -101,7 +101,7 @@ label .section_02:
 
     show example intermediate_01_02d
 
-    "{=blue}render(){/blue} obviously enough displaying all the rectangles in a loop."
+    "{=blue}render(){/} obviously enough displaying all the rectangles in a loop."
     
     nvl clear
     show example intermediate_01_02e
@@ -116,13 +116,13 @@ label .section_03:
     "How about something slightly more practicle, for example a simple color picker?"
     "To access an image's color data, renpy has {a=https://www.renpy.org/doc/html/cdd.html#renpy.load_surface}renpy.load_surface(){/a} method."
     "The docs tell us, it \"loads the image manipulator and returns a pygame Surface.\""
-    "{a=https://www.pygame.org/docs/ref/surface.html}Pygame Surface{/a} has its share of methods, some of them are implemented in ren'py, and we'll focus on the {=blue}get_at(){/blue} method specifically, which can get the color value at a single pixel."
+    "{a=https://www.pygame.org/docs/ref/surface.html}Pygame Surface{/a} has its share of methods, some of them are implemented in ren'py, and we'll focus on the {=blue}get_at(){/} method specifically, which can get the color value at a single pixel."
 
     nvl clear
     show example intermediate_01_03a large
 
-    "Omitting the obvious parts, we get something like this for {=blue}event(){/blue}."
-    "The method's supposed to return the color under the mouse pointer and keep it as {=green}self.selected{/green}."
+    "Omitting the obvious parts, we get something like this for {=blue}event(){/}."
+    "The method's supposed to return the color under the mouse pointer and keep it as {=green}self.selected{/}."
 
     show example intermediate_01_03b
 
@@ -131,7 +131,7 @@ label .section_03:
     nvl clear
     show example intermediate_01_03c
 
-    "Finally, to display the selected pixel's information, we return to the {=blue}render(){/blue}."
+    "Finally, to display the selected pixel's information, we return to the {=blue}render(){/}."
 
     nvl clear
     hide example
@@ -146,24 +146,24 @@ label .section_04:
 
     nvl clear
     
-    "Before we call it a day, I'd like to go back a few steps, and point at {=blue}get_at(){/blue} method."
-    "As expected, you can manipulate pixels on the canvas with {=blue}set_at(){/blue} method."
+    "Before we call it a day, I'd like to go back a few steps, and point at {=blue}get_at(){/} method."
+    "As expected, you can manipulate pixels on the canvas with {=blue}set_at(){/} method."
     "Let's make our render perform hue rotation to the picture."
 
     nvl clear
     show example intermediate_01_04a large
 
-    "{=green}self.hue{/green} is our new variable memorizing the current hue shift value."
+    "{=green}self.hue{/} is our new variable memorizing the current hue shift value."
 
     show example intermediate_01_04b
 
-    "It is updated every time, the {=blue}render(){/blue} triggers."
-    "Also, we trigger next {=blue}renpy.redraw(){/blue} as soon as possible."
+    "It is updated every time, the {=blue}render(){/} triggers."
+    "Also, we trigger next {=blue}renpy.redraw(){/} as soon as possible."
 
     nvl clear
     show example intermediate_01_04c
 
-    "Next we add already familiar methods {=blue}load_surface(){/blue}, {=blue}get_size(){/blue}, {=blue}blit(){/blue}."
+    "Next we add already familiar methods {=blue}load_surface(){/}, {=blue}get_size(){/}, {=blue}blit(){/}."
 
     show example intermediate_01_04d
 
@@ -176,7 +176,7 @@ label .section_04:
     nvl clear
     show example intermediate_01_04f
 
-    "One tiny detail, telling us the current render {=green}st{/green} and we're ready to go."
+    "One tiny detail, telling us the current render {=green}st{/} and we're ready to go."
 
     nvl clear
     hide example
@@ -188,7 +188,7 @@ label .section_04:
         close = True
     )
 
-    "That said, the example is {=red}purely demonstrational{/red} and you're not supposed to use it to actually manipulate the image data like this, preferring {a=https://www.renpy.org/doc/html/matrixcolor.html#matrixcolor}matrixcolor{/a} over canvas."
+    "That said, the example is {=red}purely demonstrational{/} and you're not supposed to use it to actually manipulate the image data like this, preferring {a=https://www.renpy.org/doc/html/matrixcolor.html#matrixcolor}matrixcolor{/a} over canvas."
 
     return
 

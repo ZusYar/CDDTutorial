@@ -11,6 +11,7 @@ Lesson 5 - Transform
 Intermediate:
 Lesson 1 - Canvas
 Lesson 2 - CDD children
+Lesson 3 - Shaders
 
 ... to be continued?
 

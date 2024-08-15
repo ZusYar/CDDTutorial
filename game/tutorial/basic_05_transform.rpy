@@ -15,7 +15,7 @@ label .section_01:
 
     show example basic_05_01b
 
-    "We will of course focus only on the {=blue}render{/blue} method."
+    "We will of course focus only on the {=blue}render{/} method."
     
     nvl clear
     show example basic_05_01c
@@ -24,7 +24,7 @@ label .section_01:
 
     show example basic_05_01d
 
-    "We assume, that {=green}child_render{/green} will get the rendered image alright, without forcing us to change our calculations."
+    "We assume, that {=green}child_render{/} will get the rendered image alright, without forcing us to change our calculations."
 
     hide example
 
@@ -50,7 +50,7 @@ label .section_03:
 
     nvl clear
 
-    "It is not necessary to program transforms inside the {=blue}render{/blue} itself."
+    "It is not necessary to program transforms inside the {=blue}render{/} itself."
 
     show example basic_05_03a small
 
@@ -81,12 +81,12 @@ label .section_03:
     show example basic_05_03d
 
     "Let's take a breath and think it over."
-    "The thing is, there's a {=red}new{/red} transform created every time we render the CDD."
+    "The thing is, there's a {=red}new{/} transform created every time we render the CDD."
 
     hide example
     show example basic_05_03e large
 
-    "In order to avoid it, we'll apply transform during CDD {=red}init{/red}, and then render it instead."
+    "In order to avoid it, we'll apply transform during CDD {=red}init{/}, and then render it instead."
 
     hide example
     nvl clear

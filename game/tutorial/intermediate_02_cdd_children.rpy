@@ -6,7 +6,7 @@ label .section_01:
 
     show example intermediate_02_01a large
 
-    "Looking back at the lesson when we were using {=blue}blit(){/blue} to display multiple image parts, we can easily notice how fast the {=blue}render(){/blue} method can turn into so called spaghetti code, needlessly long with nearly identical copy-pasted lines doing approximately the same job."
+    "Looking back at the lesson when we were using {=blue}blit(){/} to display multiple image parts, we can easily notice how fast the {=blue}render(){/} method can turn into so called spaghetti code, needlessly long with nearly identical copy-pasted lines doing approximately the same job."
 
     hide example
 
@@ -17,7 +17,7 @@ label .section_01:
     show example intermediate_02_02a small
 
     "We start simply enough with making this class."
-    "As you can see, it only returns its rendered {=green}image{/green}."
+    "As you can see, it only returns its rendered {=green}image{/}."
 
     nvl clear
     hide example
@@ -28,7 +28,7 @@ label .section_01:
 
     show example intermediate_02_02c
 
-    "By the way, we can use ren'py transforms such as {=blue}Crop{/blue}, make them children of the CDD and store as {=green}self.children{/green}."
+    "By the way, we can use ren'py transforms such as {=blue}Crop{/}, make them children of the CDD and store as {=green}self.children{/}."
 
     hide example
     show example intermediate_02_02d small
@@ -47,7 +47,7 @@ label .section_02:
 
     "All the children are displayed in a single position on the screen."
     "We need to somehow tell the children their x/y offsets."
-    "For example, we can change the way we organize {=green}self.children{/green}."
+    "For example, we can change the way we organize {=green}self.children{/}."
 
     show example intermediate_02_03a small
 
@@ -72,7 +72,7 @@ label .section_02:
 label .section_03:
 
     "Another way to store the children offsets could be passing them as arguments to the constructor."
-    "Actually, let's also pass the crop and construct the whole transform in the child's {=blue}render(){/blue}."
+    "Actually, let's also pass the crop and construct the whole transform in the child's {=blue}render(){/}."
 
     show example intermediate_02_04a
 
@@ -86,11 +86,11 @@ label .section_03:
     hide example
     show example intermediate_02_04c large
 
-    "Our {=green}Example_Child{/green} class will take and memorize the arguments."
+    "Our {=green}Example_Child{/} class will take and memorize the arguments."
 
     show example intermediate_02_04d
 
-    "{=green}self.image{/green} and {=green}self.crop{/green} are then used to create Transform. I've also added zoom property changing over time."
+    "{=green}self.image{/} and {=green}self.crop{/} are then used to create Transform. I've also added zoom property changing over time."
 
     show example intermediate_02_04e
 
@@ -109,7 +109,7 @@ label .section_04:
 
     show example intermediate_02_05a large
 
-    "In addition to already known arguments, here's a bunch of optional: {=green}rotation{/green} speed, {=green}x/y shift{/green} directions and max {=green}distance{/green} to shift, and {=green}transform to apply{/green}."
+    "In addition to already known arguments, here's a bunch of optional: {=green}rotation{/} speed, {=green}x/y shift{/} directions and max {=green}distance{/} to shift, and {=green}transform to apply{/}."
     "Initial offsets are there in order to shift the child relative to these coordinates."
 
     hide example
@@ -133,11 +133,11 @@ label .section_04:
     nvl clear
     show example intermediate_02_05e
 
-    "Back to the child {=blue}render(){/blue}. If {=green}transform{/green} is present, we can apply it. (Transforms are callable objects and here's the check)."
+    "Back to the child {=blue}render(){/}. If {=green}transform{/} is present, we can apply it. (Transforms are callable objects and here's the check)."
 
     show example intermediate_02_05f
     
-    "Children should update their offset every time. For a change, I've made {=green}xoffset{/green} moving with sine function and {=green}yoffset{/green} with cosine."
+    "Children should update their offset every time. For a change, I've made {=green}xoffset{/} moving with {b}sine{/b} function and {=green}yoffset{/} with {b}cosine{/b}."
 
     show example intermediate_02_05g
 

@@ -17,24 +17,30 @@ screen main_menu():
             text "[config.version]":
                 style "main_menu_version"
 
-    vbox:
-        xoffset 20
-        yoffset 20
-        label "Basics"
-        textbutton 'Lesson 1 - First CDD' action Start('basic_01_first_cdd')
-        textbutton 'Lesson 2 - Events (Mouse)' action Start('basic_02_events')
-        textbutton 'Lesson 3 - Events (Keyboard)' action Start('basic_03_kb_events')
-        textbutton 'Lesson 4 - Render methods' action Start('basic_04_blit')
-        textbutton 'Lesson 5 - Transform' action Start('basic_05_transform')
-        text "{space=200}???" style 'unavailable'
-        
-        label "Intermediate"
-        textbutton 'Lesson 1 - Canvas' action Start('intermediate_01_canvas')
-        textbutton 'Lesson 2 - CDD children' action Start('intermediate_02_cdd_children')
-        text "{space=200}???" style 'unavailable'
+    viewport:
+        pos (16, 16)
+        xysize (360, 670)
+        scrollbars None
 
-        #label "Test feature"
-        #textbutton 'Test Lesson' action Start('test_lesson')
+        vbox:
+            xoffset 20
+            yoffset 20
+            label "Basics"
+            textbutton 'Lesson 1 - First CDD' action Start('basic_01_first_cdd')
+            textbutton 'Lesson 2 - Events (Mouse)' action Start('basic_02_events')
+            textbutton 'Lesson 3 - Events (Keyboard)' action Start('basic_03_kb_events')
+            textbutton 'Lesson 4 - Render methods' action Start('basic_04_blit')
+            textbutton 'Lesson 5 - Transform' action Start('basic_05_transform')
+            text "{space=200}???" style 'unavailable'
+            
+            label "Intermediate"
+            textbutton 'Lesson 1 - Canvas' action Start('intermediate_01_canvas')
+            textbutton 'Lesson 2 - CDD children' action Start('intermediate_02_cdd_children')
+            textbutton 'Lesson 3 - Shaders' action Start('intermediate_03_shaders')
+            text "{space=200}???" style 'unavailable'
+
+            #label "Test feature"
+            #textbutton 'Test Lesson' action Start('test_lesson')
 
     text "...to be continued?" style "main_menu_tbc"
     text "[gui.about]" style "main_menu_about"

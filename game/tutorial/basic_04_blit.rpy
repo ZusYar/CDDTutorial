@@ -18,7 +18,7 @@ label .section_01:
     "Now the most important thing is not to get confused. Compare these two commands."
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.Render}renpy.Render{/a} is the class we use to create a new render."
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.render}renpy.render(){/a} is a function that returns an instance of the renpy.Render class with the specified image inside."
-    "{=green}new_render{/green} and {=green}child_render{/green} are both equivalent Render instances, so both have access to all methods of the {=blue}renpy.Render{/blue} class."
+    "{=green}new_render{/} and {=green}child_render{/} are both equivalent Render instances, so both have access to all methods of the {=blue}renpy.Render{/} class."
     "What can this class do? Let's look at the documentation and observe a few methods."
 
     nvl clear
@@ -38,6 +38,10 @@ label .section_01:
     
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.blit}blit(){/a} - Draws another render object into this render object."
 
+    show example basic_04_01g
+
+    "{a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.zoom}zoom(){/a} - Sets the zoom level of the children of this displayable in the horizontal and vertical axes."
+
     hide example
     
     "Let's get practical."
@@ -48,7 +52,7 @@ label .section_02:
 
     show example basic_04_02a
 
-    "As our first step we'll render {=green}background{/green} as a {=green}child_render{/green}."
+    "As our first step we'll render {=green}background{/} as a {=green}child_render{/}."
 
     show example basic_04_02b
     show screen test_screen('eileen_head_example')
@@ -57,8 +61,12 @@ label .section_02:
 
     show example basic_04_02c
 
-    extend" and blit the head into the mouse position."
-    "Note, that {=green}head{/green} is a Render object just as well."
+    extend ", resize it"
+
+    show example basic_04_02d
+
+    extend" and blit into the mouse position."
+    "Note, that {=green}head{/} is a Render object just as well."
 
     hide screen test_screen
     hide example
@@ -86,7 +94,7 @@ label .section_03:
 
     show example basic_04_03c
 
-    "All we need to do now is simply offset the position by these values when we blit the {=green}child_render{/green}."
+    "All we need to do now is simply offset the position by these values when we blit the {=green}child_render{/}."
     "And we're ready to go."
 
     hide screen test_screen
@@ -118,7 +126,7 @@ label .section_04:
 
     show example basic_04_04c
 
-    "Current distance can be calculated for example with use of {a=https://www.w3schools.com/python/ref_math_sin.asp}sine function{/a} from current {=green}st{/green} value (need to import math library)."
+    "Current distance can be calculated for example with use of {a=https://www.w3schools.com/python/ref_math_sin.asp}sine function{/a} from current {=green}st{/} value (need to import math library)."
 
     nvl clear
     show example basic_04_04d
@@ -157,6 +165,7 @@ init python in basic_04:
             child_render = renpy.render(self.background, width, height, st, at)
     
             head = child_render.subsurface((0, 0, 300, 280))
+            head.zoom(0.8, 0.4)
             new_render.blit(head, (self.x, self.y))
 
             renpy.redraw(self, 0)

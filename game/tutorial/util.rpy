@@ -1,5 +1,7 @@
+### DEFINES ###
 define narrator = Character(None, kind=nvl)
 
+### STYLES ###
 style blue is text:
     color '#6453f7'
   
@@ -13,6 +15,7 @@ style note is text:
     color '#eee'
     outlines [(1, '#070424dd', 1, 1)]
 
+### SCREENS ###
 screen test_screen(obj, desc=None, close=None):
 
     default game = obj
@@ -25,3 +28,9 @@ screen test_screen(obj, desc=None, close=None):
         textbutton "CLOSE" action Return() xalign 1.0 yalign 0.05
     else:
         key 'dismiss' action Return()
+
+### FUNCTIONS ###
+
+init -99 python:
+    def clamp(a, b=0, c=1):
+        return sorted((a, b, c))[1]

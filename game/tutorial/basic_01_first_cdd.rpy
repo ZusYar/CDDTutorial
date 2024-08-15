@@ -42,15 +42,15 @@ label basic_01_first_cdd:
 
     "CDD has a {a=https://www.renpy.org/doc/html/cdd.html#renpy.Displayable.render}def render(){/a} method for this."
     "Consider the arguments:"
-    "{=green}width, height{/green} - the amount of space available to this displayable, in pixels."
-    "{=green}st{/green} - a float, the shown timebase, in seconds."
-    "{=green}at{/green} - animation timebase. (This applies to displaying different pictures with the same tag, so it will not interest us in this context.)"
+    "{=green}width, height{/} - the amount of space available to this displayable, in pixels."
+    "{=green}st{/} - a float, the shown timebase, in seconds."
+    "{=green}at{/} - animation timebase. (This applies to displaying different pictures with the same tag, so it will not interest us in this context.)"
 
     nvl clear
     show example basic_01_02b
 
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy-render}renpy.Render{/a} makes a new empty render."
-    "For the sake of clarity in this lesson, let's call it {=green}new_render{/green}."
+    "For the sake of clarity in this lesson, let's call it {=green}new_render{/}."
 
     show example basic_01_02c
 
@@ -64,12 +64,12 @@ label basic_01_first_cdd:
     show example basic_01_02d
 
     "Each render object has method {a=https://www.renpy.org/doc/html/cdd.html#renpy.Render.place}place(){/a}, and most interesting arguments are as follows:"
-    "{=green}d{/green} - a displayable to render. We will use {=green}self.background{/self} for that."
-    "{=green}x, y{/green} - position to place the displayable. It's defaulted to 0, and we can provide it with something else."
+    "{=green}d{/} - a displayable to render. We will use {=green}self.background{/} for that."
+    "{=green}x, y{/} - position to place the displayable. It's defaulted to 0, and we can provide it with something else."
 
     show example basic_01_02e
 
-    "The method, called on our {=green}new_render{/green} will automatically render {=green}self.background{/self} inside {=green}new_render{/green} (at the position x=150, y=25)."
+    "The method, called on our {=green}new_render{/} will automatically render {=green}self.background{/} inside {=green}new_render{/} (at the position x=150, y=25)."
 
     hide example
     nvl clear

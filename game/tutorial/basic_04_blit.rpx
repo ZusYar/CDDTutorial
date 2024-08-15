@@ -32,6 +32,14 @@ subsurface(rect)
 blit(source, pos, main=True)
 #end basic_04_01f
 
+#begin basic_04_01g
+place(d, x=0, y=0, width=None, height=None, st=None, at=None, render=None, main=True)
+get_size()
+subsurface(rect)
+blit(source, pos, main=True)
+zoom(xzoom, yzoom)
+#end basic_04_01g
+
 
 #begin basic_04_02a
 def render(self, width, height, st, at):
@@ -57,10 +65,22 @@ def render(self, width, height, st, at):
     child_render = renpy.render(self.background, width, height, st, at)
     
     head = child_render.subsurface(0, 0, 300, 280)
-    new_render.blit(head, (self.x, self.y)) # <--
+    head.zoom(0.8, 0.4) # <--
 
     return new_render 
 #end basic_04_02c
+
+#begin basic_04_02d
+def render(self, width, height, st, at):
+    new_render = renpy.Render(width, height)
+    child_render = renpy.render(self.background, width, height, st, at)
+    
+    head = child_render.subsurface(0, 0, 300, 280)
+    head.zoom(0.8, 0.4) # <--
+    new_render.blit(head, (self.x, self.y)) # <--
+
+    return new_render 
+#end basic_04_02d
 
 #begin basic_04_03a
 def render(self, width, height, st, at):

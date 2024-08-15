@@ -10,9 +10,9 @@ label .section_1:
 
     "CDD's {a=https://www.renpy.org/doc/html/cdd.html#renpy.Displayable.event}def event(){/a} method is responsible for processing external events. It's doing absolutely nothing at the moment."
     "Consider the arguments:"
-    "{=green}ev{/green} - the event itself. More details available in {a=http://www.pygame.org/docs/ref/event.html}pygame{/a} docs."
-    "{=green}x, y{/green} - coordinates of the event that occurred, relative to the upper left corner of the CDD."
-    "{=green}st{/green} - a float, the shown timebase, in seconds."
+    "{=green}ev{/} - the event itself. More details available in {a=http://www.pygame.org/docs/ref/event.html}pygame{/a} docs."
+    "{=green}x, y{/} - coordinates of the event that occurred, relative to the upper left corner of the CDD."
+    "{=green}st{/} - a float, the shown timebase, in seconds."
     "We will only process the events we are interested in, so everything else should be ignored."
 
     show example basic_02_01b
@@ -23,10 +23,10 @@ label .section_1:
     hide example
 
     "It's time to find out what events exist."
-    "According to the {a=http://www.pygame.org/docs/ref/event.html}pygame documentation{/a}, this could be {=green}KEYDOWN, KEYUP{/green} for the keyboard,"
-    "{=green}MOUSEBUTTONUP, MOUSEBUTTONDOWN{/green} for mouse"
-    "{=green}JOYBUTTONUP, JOYBUTTONDOWN{/green}, etc. for the gamepad"
-    "As well as others, including {=green}VIDEORESIZE{/green}."
+    "According to the {a=http://www.pygame.org/docs/ref/event.html}pygame documentation{/a}, this could be {=green}KEYDOWN, KEYUP{/} for the keyboard,"
+    "{=green}MOUSEBUTTONUP, MOUSEBUTTONDOWN{/} for mouse"
+    "{=green}JOYBUTTONUP, JOYBUTTONDOWN{/}, etc. for the gamepad"
+    "As well as others, including {=green}VIDEORESIZE{/}."
 
     nvl clear
     show example basic_02_01c
@@ -51,20 +51,20 @@ label .section_1:
 
     show example basic_02_01f
 
-    "Note, that in CDD, you don't need to check the event type for this, because the coordinates {=green}x, y{/green} are already passed to {=blue}event{/blue} method."
+    "Note, that in CDD, you don't need to check the event type for this, because the coordinates {=green}x, y{/} are already passed to {=blue}event{/} method."
     
     nvl clear
     show example basic_02_02a
 
-    "Let's initialize our CDD with starting {=green}x, y{/green} positions at 0 (upper left corner)."
+    "Let's initialize our CDD with starting {=green}x, y{/} positions at 0 (upper left corner)."
 
     show example basic_02_02b
 
-    "Fix the {=blue}render{/blue} and let it actually utilize the object's {=green}x, y{/green}."
+    "Fix the {=blue}render{/} and let it actually utilize the object's {=green}x, y{/}."
 
     show example basic_02_02c
 
-    "And don't forget to update the coordinates every time the {=blue}event{/blue} method triggers."
+    "And don't forget to update the coordinates every time the {=blue}event{/} method triggers."
 
     hide example
     nvl clear
@@ -87,16 +87,16 @@ label .section_2:
     show example basic_02_04a small
 
     "{a=https://www.renpy.org/doc/html/cdd.html#renpy.redraw}renpy.redraw{/a} function comes to the rescue."
-    "It causes the displayable {=green}d{/green} to be redrawn when {=green}when{/green} seconds have elapsed."
+    "It causes the displayable {=green}d{/} to be redrawn when {=green}when{/} seconds have elapsed."
 
     show example basic_02_04b
 
-    "We are going to use it from our CDD, which is a displayable, thus {=green}d{/green} will refer to {=green}self{/green}, and {=green}when{/green} should indicate \"we want it as soon as possible\", in other words - it's 0."
+    "We are going to use it from our CDD, which is a displayable, thus {=green}d{/} will refer to {=green}self{/}, and {=green}when{/} should indicate \"we want it as soon as possible\", in other words - it's 0."
 
     nvl clear
     show example basic_02_04c
 
-    "Because we update {=green}x, y{/green} constantly, let's put it into the {=blue}render{/blue} method, making it refresh itself every time the displayable is rendered."
+    "Because we update {=green}x, y{/} constantly, let's put it into the {=blue}render{/} method, making it refresh itself every time the displayable is rendered."
 
     hide example
     show example basic_02_05a large
@@ -118,7 +118,7 @@ label .section_3:
 
     show example basic_02_06a small
 
-    "Therefore, now we will correct the positioning, and in order not to overload the {=blue}event{/blue} method itself with unnecessary information, we will move the logic into a separate method."
+    "Therefore, now we will correct the positioning, and in order not to overload the {=blue}event{/} method itself with unnecessary information, we will move the logic into a separate method."
 
     show example basic_02_06b
 
@@ -128,7 +128,7 @@ label .section_3:
     show example basic_02_06c
     nvl clear
 
-    "Unlike keyboard events, rather than checking {=green}ev.key{/green}, we will have to check {=green}ev.button{/green}."
+    "Unlike keyboard events, rather than checking {=green}ev.key{/}, we will have to check {=green}ev.button{/}."
     "Here's a little reference:\n1 - left click\n2 - middle click\n3 - right click\n4 - scroll up\n5 - scroll down."
 
     hide example
