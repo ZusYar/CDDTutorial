@@ -31,6 +31,7 @@ screen main_menu():
             textbutton 'Lesson 3 - Events (Keyboard)' action Start('basic_03_kb_events')
             textbutton 'Lesson 4 - Render methods' action Start('basic_04_blit')
             textbutton 'Lesson 5 - Transform' action Start('basic_05_transform')
+            textbutton 'Lesson 6 - Focus' action Start('basic_06_focus')
             text "{space=200}???" style 'unavailable'
             
             label "Intermediate"

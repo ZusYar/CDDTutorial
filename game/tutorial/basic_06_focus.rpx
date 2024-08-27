@@ -1,0 +1,300 @@
+#begin basic_06_01a
+def add_focus(self, d, arg=None, x=0, y=0, w=None, h=None, mx=None, my=None, mask=None)
+    """
+    This is called to indicate a region of the screen that can be
+    focused.
+
+    `d` - the displayable that is being focused.
+    `arg` - an argument.
+
+    The rest of the parameters are a rectangle giving the portion of
+    this region corresponding to the focus.
+
+
+    If they are all None, than this focus is assumed to be the singular full-screen focus.
+    If they are all False, this focus can be grabbed, but will not be focused by mouse
+    or keyboard focus.
+    """ 
+#end basic_06_01a
+
+#begin basic_06_01b
+def render(self, width, height, st, at):
+    rv = renpy.Render(width, height)
+    
+    child = renpy.render(self.widget, width, height, st, at)
+    w, h = child.get_size()
+    rv.blit(child, (0, 0))
+    
+    rv.add_focus(self, None, # <--- focus on self, arg is None
+        0, 0, w, h, # <--- x, y, w, h = focus rectangle
+        None, None, None) # <--- mask is not important now
+
+    return rv 
+#end basic_06_01b
+
+#begin basic_06_01c
+def render(self, width, height, st, at):
+    rv = renpy.Render(width, height)
+    
+    child = renpy.render(self.widget, width, height, st, at)
+    w, h = child.get_size()
+    rv.blit(child, (0, 0))
+    
+    rv.add_focus(self, None,
+        0, 0, w, h,
+        None, None, None)
+
+    return rv 
+
+def event(self, ev, x, y, st):
+    if not self.is_focused():   # <--- quit reacting to events outside of the CDD's focus rect
+        return None
+
+    self.x, self.y = x, y
+    renpy.redraw(self, 0)
+    raise renpy.IgnoreEvent
+#end basic_06_01c
+
+#begin basic_06_02a
+Example(
+    idle='eileen concerned',
+    hovered='eileen happy',
+    pressed='eileen vhappy',
+    transform=Transform(crop=(0, 0, 300, 300)),
+    xpos=400, ypos=100 #<---
+)
+#end basic_06_02a
+
+#begin basic_06_02b
+Example(
+    idle='eileen concerned',
+    hovered='eileen happy',
+    pressed='eileen vhappy',
+    transform=Transform(crop=(0, 0, 300, 300)), #<---
+    xpos=400, ypos=100
+)
+#end basic_06_02b
+
+#begin basic_06_02c
+class Example(renpy.Displayable):
+    def __init__(self, idle, hovered, pressed, transform=None, **kwargs):
+        super().__init__(**kwargs)
+        self.idle = renpy.displayable(idle)
+        self.hovered = renpy.displayable(hovered)
+        self.pressed = renpy.displayable(pressed)
+        self.transform = transform
+
+        self.x, self.y = 0, 0
+        self.state = self.idle
+        self.lmb_pressed = False
+#end basic_06_02c
+
+#begin basic_06_02d
+def event(self, ev, x, y, st):
+    if not self.is_focused():
+        return None
+
+    self.x, self.y = x, y
+    
+    if ev.type == pygame.MOUSEBUTTONDOWN:
+        self.lmb_pressed = True
+        renpy.redraw(self, 0)
+    
+    elif ev.type == pygame.MOUSEBUTTONUP:
+        self.lmb_pressed = False
+        renpy.redraw(self, 0)
+    
+    raise renpy.IgnoreEvent
+#end basic_06_02d
+
+#begin basic_06_02e
+def render(self, width, height, st, at):
+    rv = renpy.Render(width, height)
+
+    # <---
+    d = self.pressed if self.lmb_pressed else self.state
+    if callable(self.transform):
+        d = self.transform(d)
+
+    child = renpy.render(d, width, height, st, at)
+    w, h = child.get_size()
+    rv.blit(child, (0, 0))
+    
+    rv.add_focus(self, None,
+        0, 0, w, h,
+        None, None, None)
+
+    return rv 
+#end basic_06_02e
+
+#begin basic_06_02f
+def focus(self, default=False):
+    super().focus(default)
+    self.state = self.hovered # <---
+
+def unfocus(self, default=False):
+    super().unfocus(default)
+    self.state = self.idle # <---
+#end basic_06_02f
+
+#begin basic_06_02g
+def focus(self, default=False):
+    super().focus(default)
+    self.state = self.hovered
+
+def unfocus(self, default=False):
+    super().unfocus(default)
+    self.state = self.idle
+    self.lmb_pressed = False # <---
+#end basic_06_02g
+
+#begin basic_06_02h
+class Example(renpy.Displayable):
+    def __init__(self, idle, hovered, pressed, transform=None, **kwargs):
+        super().__init__(**kwargs)
+        self.idle = renpy.displayable(idle)
+        self.hovered = renpy.displayable(hovered)
+        self.pressed = renpy.displayable(pressed)
+        self.transform = transform
+
+        self.x, self.y = 0, 0
+        self.state = self.idle
+        self.lmb_pressed = False
+    
+    def render(self, width, height, st, at):
+        rv = renpy.Render(width, height)
+        
+        d = self.pressed if self.lmb_pressed else self.state
+        if callable(self.transform):
+            d = self.transform(d)
+        child = renpy.render(d, width, height, st, at)
+        
+        w, h = child.get_size()
+        rv.blit(child, (0, 0))
+        
+        rv.add_focus(self, None,
+            0, 0, w, h,
+            None, None, None)
+
+        return rv 
+
+    def event(self, ev, x, y, st):
+        if not self.is_focused():
+            return None
+
+        self.x, self.y = x, y
+        
+        if ev.type == pygame.MOUSEBUTTONDOWN:
+            self.lmb_pressed = True
+            renpy.redraw(self, 0)
+        
+        elif ev.type == pygame.MOUSEBUTTONUP:
+            self.lmb_pressed = False
+            renpy.redraw(self, 0)
+        
+        raise renpy.IgnoreEvent
+
+    def focus(self, default=False):
+        super().focus(default)
+        self.state = self.hovered
+
+    def unfocus(self, default=False):
+        super().unfocus(default)
+        self.state = self.idle
+        self.lmb_pressed = False
+#end basic_06_02h
+
+#begin basic_06_03a
+def render(self, width, height, st, at):
+    ...
+    rv.add_focus(self, None,
+        0, 0, w, h,
+        0, 0, rv) # <---
+    ...
+#end basic_06_03a
+
+#begin basic_06_03b
+def focus(self, default=False):
+    super().focus(default)
+    self.state = self.hovered
+    self.set_transform_event("hover") # <---
+
+def unfocus(self, default=False):
+    super().unfocus(default)
+    self.state = self.idle
+    self.lmb_pressed = False
+    self.set_transform_event("idle") # <---
+#end basic_06_03b
+
+#begin basic_06_03c
+screen test_screen(obj):
+    default game = obj
+
+    add game at transform:
+        alpha 0.5
+        on idle:
+            linear 0.5 alpha 0.5
+        on hover:
+            linear 0.5 alpha 1.0
+
+#end basic_06_03c
+
+#begin basic_06_03d
+screen test_screen(obj):
+    default game = obj
+
+    add game at transform:
+        alpha 0.5
+        on idle:
+            linear 0.5 alpha 0.5
+        on hover:
+            linear 0.5 alpha 1.0
+
+call screen test_screen(
+    obj = Example(
+        idle='eileen concerned',
+        hovered='eileen happy',
+        pressed='eileen vhappy',
+        transform=Transform(crop=(0, 0, 300, 300)),
+        xpos=400, ypos=100 # <---
+    )
+)
+#end basic_06_03d
+
+#begin basic_06_03e
+screen test_screen(obj):
+    default game = obj
+
+    add game at transform:
+        alpha 0.5
+        on idle:
+            linear 0.5 alpha 0.5
+        on hover:
+            linear 0.5 alpha 1.0
+
+call screen test_screen(
+    obj = Example(
+        idle='eileen concerned',
+        hovered='eileen happy',
+        pressed='eileen vhappy',
+        transform=Transform(crop=(0, 0, 300, 300)),
+        xpos=400, ypos=100,
+        action=Notify('click') # <---
+    )
+)
+#end basic_06_03e
+
+#begin basic_06_03f
+def event(self, ev, x, y, st):
+
+    ...
+
+    elif ev.type == pygame.MOUSEBUTTONUP:
+        self.lmb_pressed = False
+        renpy.redraw(self, 0)
+
+        if callable(self.action):   # <---
+            self.action()
+    
+    ...
+#end basic_06_03f
